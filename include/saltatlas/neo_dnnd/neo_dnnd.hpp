@@ -907,6 +907,10 @@ class neo_dnnd {
                       << ", actual: " << fvs[i].size() << std::endl;
         m_comm.abort();
       }
+      if (pstore->contains(ids[i])) {
+        m_comm.cerr() << "Error: duplicate ID found: " << ids[i] << std::endl;
+        m_comm.abort();
+      }
       std::memcpy((*pstore)[ids[i]], fvs[i].data(),
                   fvs[i].size() * sizeof(fe_type));
     }
